@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>寺坂 柊作 / Portfolio</title>
+<meta name="description" content="VOR研究 × センシング × 機械学習 / 中央大学大学院">
+<style>
+  :root {
+    --bg: #0f1419;
+    --surface: #1a2028;
+    --surface-2: #232a35;
+    --border: #2d3744;
+    --text: #e8eef5;
+    --text-dim: #8b95a3;
+    --accent: #4a9eff;
+    --accent-soft: #1e3a5f;
+    --green: #4ade80;
+    --purple: #a78bfa;
+    --yellow: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "Yu Gothic UI", "Meiryo", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Top nav */
+  .topnav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(15,20,25,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .topnav .brand { font-weight: 600; font-size: 1rem; }
+  .topnav .brand span { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; }
+  .topnav ul { list-style: none; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .topnav ul a { color: var(--text-dim); font-size: 0.85rem; }
+  .topnav ul a:hover { color: var(--accent); text-decoration: none; }
+
+  /* Hero */
+  .hero {
+    padding: 4rem 2rem 3rem;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .hero .tag {
+    display: inline-block;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 0.25rem 0.75rem; border-radius: 12px;
+    font-size: 0.75rem; font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: 2.6rem; line-height: 1.2; font-weight: 700;
+    margin-bottom: 0.6rem; letter-spacing: -0.01em;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero .lead {
+    font-size: 1.15rem; color: var(--text-dim);
+    max-width: 700px; margin-bottom: 1.8rem;
+  }
+  .hero .links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .hero .links a {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.55rem 1rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; font-size: 0.9rem; color: var(--text);
+    transition: all 0.15s;
+  }
+  .hero .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* Sections */
+  section {
+    max-width: 1000px; margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  section h2 {
+    font-size: 1.5rem; margin-bottom: 0.4rem;
+    display: flex; align-items: baseline; gap: 0.6rem;
+  }
+  section h2 .num {
+    color: var(--accent); font-size: 0.85rem; font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  section .sub {
+    color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.8rem;
+  }
+
+  /* Research */
+  .research-grid {
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-top: 1.5rem;
+  }
+  .research-grid .item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.1rem;
+  }
+  .research-grid .item .k {
+    font-size: 0.75rem; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .research-grid .item .v {
+    font-size: 1.1rem; font-weight: 600;
+  }
+  .research-grid .item.accent .v { color: var(--accent); }
+  .research-body { color: var(--text); }
+  .research-body p { margin-bottom: 0.9rem; }
+
+  /* Projects */
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem 1.6rem;
+    margin-bottom: 1.2rem;
+    transition: all 0.15s;
+  }
+  .project-card:hover { border-color: var(--accent); }
+  .project-card .head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem;
+  }
+  .project-card h3 { font-size: 1.2rem; }
+  .project-card .badge {
+    display: inline-block;
+    background: var(--surface-2); color: var(--text-dim);
+    padding: 0.2rem 0.6rem; border-radius: 10px;
+    font-size: 0.72rem;
+  }
+  .project-card .badge.meta {
+    background: rgba(167,139,250,0.15); color: var(--purple);
+  }
+  .project-card .badge.lead {
+    background: rgba(74,222,128,0.15); color: var(--green);
+  }
+  .project-card .desc {
+    color: var(--text-dim); margin: 0.6rem 0 1rem;
+    font-size: 0.95rem;
+  }
+  .project-card .desc strong { color: var(--text); }
+  .project-card .features {
+    list-style: none; margin: 0.6rem 0 1rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.4rem 1rem;
+  }
+  .project-card .features li {
+    font-size: 0.85rem; color: var(--text-dim);
+    padding-left: 1.1rem; position: relative;
+  }
+  .project-card .features li::before {
+    content: "▸"; color: var(--accent);
+    position: absolute; left: 0;
+  }
+  .project-card .stack {
+    display: flex; flex-wrap: wrap; gap: 0.35rem;
+    margin: 0.8rem 0;
+  }
+  .project-card .stack span {
+    background: var(--surface-2);
+    padding: 0.2rem 0.65rem; border-radius: 4px;
+    font-size: 0.75rem; color: var(--text-dim);
+  }
+  .project-card .links {
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+  .project-card .links a {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.8rem;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 4px; color: var(--text);
+  }
+  .project-card .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+  .project-card .metrics {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    padding: 0.7rem 0.9rem;
+    background: var(--surface-2);
+    border-radius: 6px;
+    font-size: 0.78rem; color: var(--text-dim);
+    margin-top: 0.8rem;
+  }
+  .project-card .metrics b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+  /* Tech stack */
+  .stack-grid {
+    display: grid; gap: 0.6rem;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+  .stack-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 0.6rem 0.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.88rem;
+  }
+  .stack-item .name { font-weight: 500; }
+  .stack-item .yrs { color: var(--text-dim); font-size: 0.78rem; }
+  .stack-cat {
+    font-size: 0.78rem; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin: 1rem 0 0.5rem;
+  }
+  .stack-cat:first-child { margin-top: 0; }
+
+  /* ES */
+  .es-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  .es-card .meta-line {
+    display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;
+    margin-bottom: 0.5rem; font-size: 0.78rem;
+  }
+  .es-card .target {
+    background: var(--surface-2); color: var(--text-dim);
+    padding: 0.15rem 0.55rem; border-radius: 4px;
+  }
+  .es-card .cat {
+    background: rgba(74,158,255,0.15); color: var(--accent);
+    padding: 0.15rem 0.55rem; border-radius: 4px;
+  }
+  .es-card .chars {
+    color: var(--text-dim); font-variant-numeric: tabular-nums;
+    margin-left: auto;
+  }
+  .es-card .q {
+    font-weight: 500; margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .es-card details summary {
+    cursor: pointer; color: var(--accent);
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+    user-select: none;
+  }
+  .es-card details summary:hover { text-decoration: underline; }
+  .es-card details[open] summary { margin-bottom: 0.5rem; }
+  .es-card .answer {
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--border);
+    white-space: pre-wrap; font-size: 0.88rem; line-height: 1.75;
+    color: var(--text);
+  }
+  .es-note {
+    color: var(--text-dim); font-size: 0.8rem;
+    margin-top: 1.2rem; padding: 0.7rem 0.9rem;
+    background: var(--surface-2); border-radius: 6px;
+  }
+
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+  footer .contact { margin-bottom: 0.4rem; }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.9rem; }
+    .hero .lead { font-size: 1rem; }
+    section { padding: 2rem 1.2rem; }
+    .topnav { padding: 0.7rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand">寺坂 柊作 <span>/ Shusaku Terasaka</span></div>
+  <ul>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#stack">Tech Stack</a></li>
+    <li><a href="#es">Writing</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="tag">中央大学大学院 / 2028卒</div>
+  <h1>身近なデバイスで<br><span class="accent">生体反射を計測する</span>研究をしています。</h1>
+  <p class="lead">
+    数百万円の医療機器でしか測れなかった前庭動眼反射（VOR）を、市販のスマートフォン1台で計測できるシステムを設計・実装しています。
+    センシング・信号処理・深層学習・モバイル開発を横断する一気通貫のシステム構築が専門です。
+  </p>
+  <div class="links">
+    <a href="https://a22ky7r.github.io/vor-portfolio/" target="_blank">📊 研究ポートフォリオ</a>
+    <a href="https://github.com/a22ky7r/smartphone-vor" target="_blank">💻 GitHub</a>
+    <a href="mailto:hakuchan54@gmail.com">✉ Contact</a>
+  </div>
+</section>
+
+<section id="research">
+  <h2><span class="num">01</span> Research</h2>
+  <p class="sub">スマートフォンによる前庭動眼反射（VOR）の定量計測</p>
+
+  <div class="research-grid">
+    <div class="item accent">
+      <div class="k">対象</div>
+      <div class="v">VOR ゲイン</div>
+    </div>
+    <div class="item">
+      <div class="k">従来手法</div>
+      <div class="v">数百万円の専用機器</div>
+    </div>
+    <div class="item">
+      <div class="k">本研究</div>
+      <div class="v">スマホ1台</div>
+    </div>
+    <div class="item">
+      <div class="k">横断領域</div>
+      <div class="v">生理学 / CV / 信号処理 / DL</div>
+    </div>
+  </div>
+
+  <div class="research-body" style="margin-top: 1.5rem">
+    <p>前庭動眼反射（Vestibulo-Ocular Reflex）とは、頭部の回転を内耳が感知し、それと逆向きに眼球を動かすことで視線を空間に固定する反射機能です。歩行・運転中に視界がぶれないのはこの反射のおかげで、機能低下は「動くと視界が揺れる」「めまい」などの症状につながります。</p>
+
+    <p>従来、VORの精密計測には数百万円規模の専用機器（vHIT等）が必要で、専門病院でしか実施できませんでした。本研究では、市販スマートフォン1台で代替する計測系を構築しています。スマホカメラで眼球運動を、内蔵IMU（ジャイロ・加速度センサ）で頭部回転を同時記録し、両者を高精度に時刻同期させることで、安価かつ可搬なVOR計測を実現します。</p>
+
+    <p><strong style="color:var(--text)">技術的特色:</strong> 個人差の大きい眼球を限られた撮影条件下で安定して捉える必要があり、医療応用を見据えた「再現性」と「精度の定量的保証」を常に意識して取り組んでいます。専門機器を民生デバイスで置き換える課題は、技術的難度と社会的意義を兼ね備えており、最もやりがいを感じている部分です。</p>
+  </div>
+</section>
+
+<section id="projects">
+  <h2><span class="num">02</span> Projects</h2>
+  <p class="sub">研究プロジェクトと、自作した研究/就活ツール</p>
+
+  <div class="project-card">
+    <div class="head">
+      <h3>Smartphone VOR Measurement System</h3>
+      <div>
+        <span class="badge lead">主研究</span>
+        <span class="badge">2024 - 現在</span>
+      </div>
+    </div>
+    <p class="desc">
+      スマホアプリ（Android）で眼球動画・頭部回転データを取得し、PCサーバーが自動でキャリブレーション・眼球角度推定・VORゲイン算出を実行する<strong>一気通貫パイプライン</strong>を単独で設計・実装。
+    </p>
+    <ul class="features">
+      <li>RF-DETRによる瞳孔・強膜セグメンテーション</li>
+      <li>能動学習で被験者専用モデルを自動生成</li>
+      <li>ナノ秒タイムスタンプによる映像/IMU直接同期</li>
+      <li>診断計測基盤による異常フレーム自動抽出</li>
+      <li>キャリブレーション品質スコアの自動判定</li>
+      <li>VORゲイン指標を振幅比→面積比へ生理学的改良</li>
+    </ul>
+    <div class="stack">
+      <span>Kotlin (Android)</span><span>Python</span><span>RF-DETR</span><span>OpenCV</span><span>Active Learning</span><span>IMU / Sensor Fusion</span><span>時系列同期</span>
+    </div>
+    <div class="links">
+      <a href="https://a22ky7r.github.io/vor-portfolio/" target="_blank">研究ポートフォリオ ↗</a>
+      <a href="https://github.com/a22ky7r/smartphone-vor" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="head">
+      <h3>Job Hunting Dashboard <span style="color:var(--text-dim);font-size:0.85rem;font-weight:400">— AI Agent駆動の自作就活ツール</span></h3>
+      <div>
+        <span class="badge meta">メタプロジェクト</span>
+        <span class="badge">2026 -</span>
+      </div>
+    </div>
+    <p class="desc">
+      就活情報を一元管理する自作ダッシュボード。<strong>Claude Code（Anthropic）＋ Gmail MCP 連携</strong>により、新着メールから企業マイページ・説明会・インターン情報・ES設問を自動抽出し、JSON駆動で可視化する。
+    </p>
+    <ul class="features">
+      <li>カレンダー / イベント一覧 / Kanbanインターン管理</li>
+      <li>ES文字数リアルタイム計測（カテゴリ別フィルタ）</li>
+      <li>福利厚生データから企業の「ホワイトレベル」自動算出</li>
+      <li>Gmail MCP連携でメール→構造化データの自動取り込み</li>
+      <li>パスワード分離管理（gitignore + secret_ref参照）</li>
+      <li>ボタン1つでClaude Codeを起動しGmail同期</li>
+    </ul>
+    <div class="stack">
+      <span>HTML / CSS / Vanilla JS</span><span>Python</span><span>JSON Schema</span><span>Claude Code</span><span>Gmail MCP</span><span>Anthropic SDK</span>
+    </div>
+    <div class="metrics">
+      <span>管理マイページ <b>21</b> 社</span>
+      <span>イベント <b>26</b> 件</span>
+      <span>インターン <b>14</b> 件</span>
+      <span>ES下書き <b>12</b> 件</span>
+      <span>UI実装 <b>~1000</b> 行</span>
+    </div>
+    <p class="desc" style="margin-top:1rem;font-size:0.85rem">
+      AIエージェントを単なるChatBotとしてではなく、<strong>データパイプラインの一部</strong>として組み込んだ実装。MCP（Model Context Protocol）でGmailと接続し、自然言語の指示「Gmail同期して」だけで新着メールの解析→JSON更新→ビュー再生成までを完結させる。
+    </p>
+  </div>
+</section>
+
+<section id="stack">
+  <h2><span class="num">03</span> Tech Stack</h2>
+  <p class="sub">研究・開発で使用してきた技術</p>
+
+  <div class="stack-cat">Languages</div>
+  <div class="stack-grid">
+    <div class="stack-item"><span class="name">Kotlin</span><span class="yrs">2 年</span></div>
+    <div class="stack-item"><span class="name">Python</span><span class="yrs">1 年</span></div>
+    <div class="stack-item"><span class="name">C</span><span class="yrs">1 年</span></div>
+    <div class="stack-item"><span class="name">MATLAB</span><span class="yrs">2 年</span></div>
+    <div class="stack-item"><span class="name">JavaScript</span><span class="yrs">—</span></div>
+  </div>
+
+  <div class="stack-cat">Frameworks / Libraries</div>
+  <div class="stack-grid">
+    <div class="stack-item"><span class="name">RF-DETR</span><span class="yrs">DL</span></div>
+    <div class="stack-item"><span class="name">OpenCV</span><span class="yrs">CV</span></div>
+    <div class="stack-item"><span class="name">Android SDK</span><span class="yrs">モバイル</span></div>
+    <div class="stack-item"><span class="name">Unity</span><span class="yrs">半年</span></div>
+    <div class="stack-item"><span class="name">Arduino</span><span class="yrs">半年</span></div>
+  </div>
+
+  <div class="stack-cat">Tools / Workflow</div>
+  <div class="stack-grid">
+    <div class="stack-item"><span class="name">Git / GitHub</span><span class="yrs">1 年</span></div>
+    <div class="stack-item"><span class="name">Claude Code</span><span class="yrs">AI</span></div>
+    <div class="stack-item"><span class="name">MCP</span><span class="yrs">Agent連携</span></div>
+    <div class="stack-item"><span class="name">UX デザイン</span><span class="yrs">1 年</span></div>
+  </div>
+</section>
+
+<section id="es">
+  <h2><span class="num">04</span> Writing Samples</h2>
+  <p class="sub">エントリーシート設問への回答（一部抜粋・企業名は伏せています）</p>
+
+  <div class="es-card">
+    <div class="meta-line">
+      <span class="cat">専門性</span>
+      <span class="target">大手電機メーカー向け</span>
+      <span class="chars">1000字</span>
+    </div>
+    <div class="q">博士／修士論文や、学科／専攻の授業の中で、最も力を入れて学んでいるテーマの内容を記入してください。</div>
+    <details>
+      <summary>回答を読む</summary>
+      <div class="answer">私はスマートフォンを用いた前庭眼反射（VOR:Vestibulo-Ocular Reflex）の定量計測を研究しています。VORとは、頭部の回転を内耳の前庭器官が感知し、それと逆向きに眼球を動かすことで視線を空間に固定する反射機能です。歩行中や運転中でも視界がぶれないのはこの反射のおかげであり、その機能が低下すると「動くと視界が揺れる」「めまいが生じる」といった症状につながります。VORの働きは「頭がどれだけ回ったか」に対して「眼がどれだけ逆に動いたか」の比（VORゲイン、理想値1.0）で評価でき、前庭機能障害やめまい疾患の客観的な診断指標となります。
+
+　従来、VORの精密計測には数百万円規模の専用機器（ビデオヘッドインパルス検査装置など）が必要で、専門病院でしか実施できませんでした。私の研究は、これを市販のスマートフォン1台とそれを固定するヘッドギヤで代替することを目指しています。スマホのカメラで眼球運動を、内蔵IMU（ジャイロ・加速度センサ）で頭部回転を同時記録し、両者を高精度に時刻同期させることで、安価かつ可搬なVOR計測系を構築します。
+
+　この研究は、生体反射の生理学、画像処理による眼球運動推定、センサ信号処理・時系列同期、深層学習という複数領域を横断する点に特色があります。特に、眼球という個人差の大きい対象を限られた撮影条件下で安定して捉える必要があり、医療応用を見据えた「再現性」と「精度の定量的保証」を常に意識して取り組んでいます。専門機器を民生デバイスで置き換えるという課題は、技術的難度と社会的意義を兼ね備えており、私が最もやりがいを感じている部分です。</div>
+    </details>
+  </div>
+
+  <div class="es-card">
+    <div class="meta-line">
+      <span class="cat">研究内容</span>
+      <span class="target">大手電機メーカー向け</span>
+      <span class="chars">1000字</span>
+    </div>
+    <div class="q">ゼミ・研究室で取り組まれている内容をご記入ください。</div>
+    <details>
+      <summary>回答を読む</summary>
+      <div class="answer">　研究では、撮影から解析結果出力までを自動化する一気通貫パイプラインを自ら設計・実装しました。スマホアプリ（Android）で眼球動画・頭部回転データを取得し、PCへ送信すると、サーバーが自動でキャリブレーション、眼球角度推定、VORゲイン算出を実行する構成です。
+
+　眼球運動の推定には深層学習モデルRF-DETRを用い、瞳孔・強膜をセグメンテーションして視線角度を算出します。被験者ごとの個人差に対応するため、数分の映像から能動学習で被験者専用モデルを自動生成するサブシステムも構築しました。頭部回転（IMU）と眼球角度（カメラ）は記録クロックが異なるため、両信号にナノ秒タイムスタンプを付与し、相互相関に頼らず直接同期する手法を実装して同期精度を改善しました。
+
+　VORゲインの算出では、当初の振幅比からDC成分除去後の面積比へと指標を見直し、生理学的に妥当な評価へ改良しました。さらに研究を進める上で、「計測の後半でゲインが劣化する」という再現性の課題に直面しました。これに対し私は、推定の信頼度・眼球幅・楕円形状などを時系列で記録する診断計測基盤を構築し、視線推定が頭部運動から逸脱したフレームを自動抽出・原因推定するデバッグ機能を開発して、原因の切り分けを行いました。
+
+　検証の結果、ゲインが低く出る主因がキャリブレーション品質にあることを突き止めました。そこで、サンプル数・カバレッジ・残差などからキャリブの良否を自動判定する品質スコアを実装し、不良データを事前に検出できるようにしました。
+
+　この研究を通じ、仮説を立てて計測で検証し、原因を定量的に特定して改良するという研究開発サイクルを実践的に経験しました。
+　再現性と精度保証を重視する姿勢は、実務でのデータ解析やシステム開発にも活かせると考えています。</div>
+    </details>
+  </div>
+
+  <div class="es-card">
+    <div class="meta-line">
+      <span class="cat">ガクチカ</span>
+      <span class="target">大手半導体メーカー向け</span>
+      <span class="chars">500字</span>
+    </div>
+    <div class="q">取り組んだことについて、6ポイント（背景・ゴール・体制・こだわり・結果・活かし方）を含めて記述してください。</div>
+    <details>
+      <summary>回答を読む</summary>
+      <div class="answer">脳の働きへの好奇心が研究の原点です。前庭動眼反射の計測は高価で大型な専用機器を要し日常利用には程遠い現状があり、専門機器と同等の精度をスマートフォン1台で実現することをゴールに据えました。
+
+研究室に前例のないテーマだったため、指導教員と相談しながら自らプロジェクトを立ち上げ、要件定義から実装まで単独で主導してきました。最新論文を常に追って最先端技術を取捨選択し、製品化を見据えてコストやUIまで考慮することで、「研究のための研究」で終わらせない姿勢を貫きました。
+
+IMUと独自の機械学習モデルによる視線推定を組み合わせ、専門機器には及ばないものの一定の精度を達成しました。アイデアを形にして試す試行を高速で繰り返し、研究をブラッシュアップする重要性を学びました。今後も頭の中のアイデアを書き出して試作で検証する反復を続け、貴社のセンサシステム・信号処理開発で新しい価値を形にしていきます。</div>
+    </details>
+  </div>
+
+  <div class="es-note">
+    <b style="color:var(--text)">📝 ESについて:</b> 上記は実際に提出/作成したエントリーシートからの抜粋です。研究内容・取り組み姿勢・技術スタックの一貫性を重視し、企業ごとに分量や切り口を最適化しています。
+  </div>
+</section>
+
+<footer>
+  <div class="contact">
+    <a href="mailto:hakuchan54@gmail.com">hakuchan54@gmail.com</a> ·
+    <a href="https://github.com/a22ky7r" target="_blank">GitHub</a> ·
+    <a href="https://a22ky7r.github.io/vor-portfolio/" target="_blank">Research Portfolio</a>
+  </div>
+  <div>© 2026 Shusaku Terasaka · Built with vanilla HTML / CSS / JS</div>
+</footer>
+
+</body>
+</html>
